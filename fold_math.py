@@ -8,6 +8,15 @@ from multiprocessing import Pool
 # add           check
 # subtract      check
 
+def average(arguments, cores=4):
+    pass
+
+def permutate(n, r, cores=4):
+    pass
+
+def power(base, exponent, cores=4):
+    pass
+
 def factorial(n, cores=4):
     factors = range(1, n + 1)
     return multiply(factors, cores=cores)
@@ -16,7 +25,7 @@ def combination(n, r, cores=4):
     pass
 #    n! /(k! * (n-k)!)
 
-def division(arguments, cores=4):
+def divide(arguments, cores=4):
     numerator = arguments[0]
     denominator = multiply(arguments[1:], cores=cores)
     return numerator/divisor        # TODO will this fail because of integer division ???
@@ -28,7 +37,7 @@ def multiply(arguments, cores=4):
             total *= argument
         return total
 
-    return do_mapping(muti_list, arguments, cores)
+    return do_mapping(multi_list, arguments, cores)
 
 def subtract(arguments, cores=4):
     minuend = arguments[0]
@@ -38,6 +47,8 @@ def subtract(arguments, cores=4):
 def add(arguments, cores=4):
     return do_mapping(sum, arguments, cores=cores)
 
+
+
 def split_fold(arguments, cores):
     """
     Cores is the number of subprocesses you intend to spawn
@@ -45,6 +56,10 @@ def split_fold(arguments, cores):
     """
     assert type(arguments) == list, 'Your first positional argument is not a list. Please pass in a list.'
     result = []
+    if len(arguments) < cores:
+        result.append(arguments)
+        return result
+
     size = len(arguments)/cores # the size of each computed chunk
     for num in range(cores):
         start = num*size
