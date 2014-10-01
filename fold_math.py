@@ -1,15 +1,35 @@
 from multiprocessing import Pool
 
-# average 
-# multi         check
-# division      check
-# factorial     check
-# combination
-# add           check
-# subtract      check
+def add(arguments, cores=4):
+    if len(arguments) < 2:
+        return None
+    for argument in arguments:
+         if not hasattr(argument, '__add__'):
+            return None
+    return do_mapping(sum, arguments, cores=cores)
+
+def subtract(arguments, cores=4):
+    if len(arguments) < 2:
+        return None
+    for argument in arguments:
+        if not hasattr(argument, '__sub__'):
+            return None
+    
+    minuend = arguments[0]
+    subtrahend = do_mapping(sum, arguments[1:], cores)
+    return minuend - subtrahend
+
 
 def average(arguments, cores=4):
-    pass
+    if len(arguments) < 1:
+        return None
+
+    for argument in arguments:
+        if not hasattr(argument, '__sub__') or not hasattr(argument, '__truediv__'):
+            return None 
+
+    total = add(arguments, cores=cores)
+    return total/len(arguments)
 
 def permutate(n, r, cores=4):
     pass
@@ -39,16 +59,8 @@ def multiply(arguments, cores=4):
 
     return do_mapping(multi_list, arguments, cores)
 
-def subtract(arguments, cores=4):
-    minuend = arguments[0]
-    subtrahend = do_mapping(sum, arguments[1:], cores)
-    return minuend - subtrahend
 
-def add(arguments, cores=4):
-    return do_mapping(sum, arguments, cores=cores)
-
-
-
+# TODO arrange to return pairs of results when cores > arguments, so computation time is log2(n)
 def split_fold(arguments, cores):
     """
     Cores is the number of subprocesses you intend to spawn

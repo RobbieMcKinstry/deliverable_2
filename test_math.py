@@ -44,8 +44,7 @@ class TestMathFunctions(unittest.TestCase):
         assert 11   == add([10, 1]),        'Produced an incorrect sum: expecting {0} and received {1}'.format(11, add([10, 1]))
   
 
-    @unittest.skip('File is not yet red. This test is red though.')
-    def test_neg_add(self):
+    def test_when_add_gets_negative_nums(self):
         """
         This will test the functionality of the add() function.
         The function will take in an array of integers that contain
@@ -54,9 +53,13 @@ class TestMathFunctions(unittest.TestCase):
         returns the sum of all positive and negative integers and
         fails otherwise.
         """
-        assert -2 == add([-2,-1,4,-3])
+        result1      = add([-2, -1, 4, 3])
+        result2      = add([-10, -1, -1, 5])
+
+        assert 4     == result1, 'Expected: {0}\nObserved: {1}'.format(-2, result1)
+        assert -7    == result2, 'Expected: {0}\nObserved: {1}'.format(-2, result2)
         
-    @unittest.skip('File is not yet red. This test is red though.')
+    
     def test_add_invalid_input(self):
         """
         This will test the functionality of the add() function.
@@ -67,9 +70,9 @@ class TestMathFunctions(unittest.TestCase):
         fails otherwise.
         """
         assert None == add([15])
+        assert None == add([ 1, {} ])
 
     """ Subtraction function tests"""
-    @unittest.skip('File is not yet red. This test is red though.')
     def test_subtraction(self):
         """
         This will test the functionality of the subtract() function.
@@ -81,7 +84,6 @@ class TestMathFunctions(unittest.TestCase):
         """
         assert 10 == subtract([20,3,6,1])
         
-    @unittest.skip('File is not yet red. This test is red though.')
     def test_neg_subtraction(self):
         """
         This will test the functionality of the subtract() function.
@@ -94,8 +96,8 @@ class TestMathFunctions(unittest.TestCase):
         the first value minus the sum of the rest of the values and
         fails otherwise."""
         assert 13 == subtract([12,-3,2])
+        assert -1 == subtract([4, 5])
 
-    @unittest.skip('File is not yet red. This test is red though.')
     def test_subtraction_invalid_input(self):
         """
         This will test the functionality of the subtract() function.
@@ -106,7 +108,8 @@ class TestMathFunctions(unittest.TestCase):
         fails otherwise.
         """
         assert None == subtract([15])
-	
+        assert None == subtract([10, 9, 'Hello World' ])
+        assert None == subtract([100, 99, {} ])
 
     """ Multiplication function tests"""
     @unittest.skip('Spawning zombies')
@@ -204,8 +207,7 @@ class TestMathFunctions(unittest.TestCase):
         """
         assert None == factorial(-3)
 		
-    """ Average function tests"""	
-    @unittest.skip('File is not yet red. This test is red though.')
+    
     def test_average(self):
         """
         This will test the functionality of the average() function.
@@ -214,10 +216,10 @@ class TestMathFunctions(unittest.TestCase):
         the returned value is the average of the integers provided in
         the array and fail otherwise.
         """
-        assert 12 == average([10,15,11])
+        result = average([10, 15, 11])
+        assert 12 == result, 'Expected: {0}\nObserved: {1}'.format(12, result)
     
-    @unittest.skip('File is not yet red. This test is red though.')
-    def test_None_average(self):
+    def test_average_has_no_args(self):
         """
         This will test the functionality of the average() function.
         This will take in an array with 0 elements in it. The 
