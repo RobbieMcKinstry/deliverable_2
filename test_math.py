@@ -72,6 +72,7 @@ class TestMathFunctions(unittest.TestCase):
         assert None == add([15])
         assert None == add([ 1, {} ])
 
+
     """ Subtraction function tests"""
     def test_subtraction(self):
         """
@@ -83,7 +84,8 @@ class TestMathFunctions(unittest.TestCase):
         the rest of the array values and fails otherwise.
         """
         assert 10 == subtract([20,3,6,1])
-        
+
+
     def test_neg_subtraction(self):
         """
         This will test the functionality of the subtract() function.
@@ -98,6 +100,7 @@ class TestMathFunctions(unittest.TestCase):
         assert 13 == subtract([12,-3,2])
         assert -1 == subtract([4, 5])
 
+
     def test_subtraction_invalid_input(self):
         """
         This will test the functionality of the subtract() function.
@@ -111,8 +114,8 @@ class TestMathFunctions(unittest.TestCase):
         assert None == subtract([10, 9, 'Hello World' ])
         assert None == subtract([100, 99, {} ])
 
+
     """ Multiplication function tests"""
-    @unittest.skip('Spawning zombies')
     def test_multiply(self):
         """
         This will test the functionality of the multiply() function.
@@ -120,10 +123,17 @@ class TestMathFunctions(unittest.TestCase):
         them together. The test passes if the returned value is the
         product of all of the values entered in the array.
         """
-        assert 72 == multiply([3,2,6,2])
+        expected = 72
+        observed = multiply([3, 2, 6, 2])
+        error    = 'Expected: {0}\nObserved: {1}'.format(expected, observed)
+        assert expected == observed, error
 
+        expected = 120
+        observed = multiply([1, 2, 3, 4, 5])
+        error    = 'Expected: {0}\nObserved: {1}'.format(expected, observed) 
+        assert expected == observed, error
+        
 
-    @unittest.skip('Spawning zombies')
     def test_neg_multiplication(self):
 	    """
 	    This will test the functionality of the multiply() function.
@@ -133,8 +143,8 @@ class TestMathFunctions(unittest.TestCase):
 	    and passes if it does so. The test fails otherwise.
 	    """
 	    assert -180 == multiply([-2,-3,6,-5])
-	
-    @unittest.skip('Spawning zombies')
+
+
     def test_multiply_invalid_input(self):
         """
         This will test the functionality of the multiply() function.
@@ -147,8 +157,8 @@ class TestMathFunctions(unittest.TestCase):
         assert None == multiply([10])
 		
     """ Division function tests """
-       
-    @unittest.skip('Spawning zombies')
+
+
     def test_divide(self):
         """
         This will test the functionality of the divide() function.
@@ -159,8 +169,8 @@ class TestMathFunctions(unittest.TestCase):
         value is equal to the numerator divided by the denominator.
         """
         assert 3 == divide([24,2,4])
-    
-    @unittest.skip('Spawming zombies')
+
+
     def test_divide_by_zero(self):
         """
         This will test the functionality of the divide() function.
@@ -170,8 +180,8 @@ class TestMathFunctions(unittest.TestCase):
         The test passes if the function returns None and fails otherwise.
         """
         assert None == divide([24,0])
-	
-    @unittest.skip('spawning zombies')
+
+
     def test_divide_invalid_input(self):
         """
         This will test the functionality of the divide() function.
@@ -184,7 +194,6 @@ class TestMathFunctions(unittest.TestCase):
         assert None == divide([23])
 	
     """ Factorial function tests """
-    @unittest.skip('File is not yet red. This test is red though.')
     def test_factorial(self):
         """
         This will test the functionality of the factorial() function.
@@ -193,10 +202,11 @@ class TestMathFunctions(unittest.TestCase):
         The test will pass if the value returned is the appropriate
         factorial value for the integer passed in.
         """
-        assert 120 == factorial(5)
+        expected = 120
+        observed = factorial(5)
+        assert expected == observed, 'Expected: {0}\nObserved: {1}'.format(expected, observed)
 
 
-    @unittest.skip('File is not yet red. This test is red though.')
     def test_neg_factorial(self):
         """
         This will test the functionality of the factorial() function.

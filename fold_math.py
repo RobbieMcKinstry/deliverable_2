@@ -46,18 +46,25 @@ def combination(n, r, cores=4):
 #    n! /(k! * (n-k)!)
 
 def divide(arguments, cores=4):
+    if len(arguments) < 2:
+        return None
+    for argument in arguments[1:]:
+        if not argument:
+            return None
     numerator = arguments[0]
     denominator = multiply(arguments[1:], cores=cores)
-    return numerator/divisor        # TODO will this fail because of integer division ???
+    return numerator/denominator        # TODO will this fail because of integer division ???
 
 def multiply(arguments, cores=4):
-    def multi_list(my_list):
-        total = 1
-        for argument in arguments:
-            total *= argument
-        return total
+    if len(arguments) < 2:
+        return None
+    return do_mapping(__multi_list, arguments, cores)
 
-    return do_mapping(multi_list, arguments, cores)
+def __multi_list(my_list):
+    total = 1
+    for argument in my_list:
+        total *= argument
+    return total
 
 
 # TODO arrange to return pairs of results when cores > arguments, so computation time is log2(n)
@@ -73,11 +80,14 @@ def split_fold(arguments, cores):
         return result
 
     size = len(arguments)/cores # the size of each computed chunk
+    start = end = 0
     for num in range(cores):
         start = num*size
         end = (num+1)*size
+        if num == cores - 1:
+            result.append(arguments[start:])
+            break
         result.append(arguments[start:end])
-
     return result
 
 
