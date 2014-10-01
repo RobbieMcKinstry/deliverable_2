@@ -3,7 +3,7 @@ from fold_math import subtract
 from fold_math import divide
 from fold_math import multiply
 
-class Fold (object):
+class Fold:
 
 	def __init__(self, core):
 		self.cores = core
