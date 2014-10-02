@@ -33,7 +33,7 @@ Summary:
 -Factorial: will take in a single integer and return the factorial of that integer
 -Average: will take in an array of integers and return the average value of the integers in the array
 
-	We will also create an object called Fold, in which we overload the addition, subtraction, multiplication and division methods, for stub and mock testing purposes. We chose this application because it is a simple, easy to implement and understand, program and it lends itself very well to unit testing. The tests can be designed very concisely, as the use of standard math functions makes it easy to determine the expected return values for a given input.
+We will also create an object called Fold, in which we overload the addition, subtraction, multiplication and division methods, for stub and mock testing purposes. We chose this application because it is a simple, easy to implement and understand, program and it lends itself very well to unit testing. The tests can be designed very concisely, as the use of standard math functions makes it easy to determine the expected return values for a given input.
 Issues:
        When writing our tests, we came across a number of issues with how to handle input that isn’t suitable to perform calculations. As responding appropriately to input that isn’t suitable to calculation is important, we realized that we would have to carefully enforce the requirements for proper input. With this in mind, we included a number of tests, at least one for each function, that checked to ensure that the method would handle bad input by returning null.
 All of our tests all passed.
