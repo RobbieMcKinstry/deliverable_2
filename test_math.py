@@ -1,5 +1,37 @@
 from fold_math import subtract, power, permutate, combination, add, factorial, multiply, divide, average, split_fold
 import unittest
+import fold
+
+class MockFold:
+
+    def __init__(self, elements, cores=4):
+        self.elements = elements
+
+    def multiply(self):
+        self.called_multiply = True
+        return 1
+
+    def add(self):
+        self.called_add = True
+        return 1
+
+
+
+class TestFoldClass(unittest.TestCase):
+    """
+    Tests the functions and the class in fold.py
+    """
+
+    def test_subtract_fold(self):
+        f = MockFold([1, 2, 3, 4])
+        fold.subtract_fold(1, f)
+        assert f.called_add
+
+    def test_divide_by_fold(self):
+        f = MockFold([1, 2, 3, 4])
+        fold.divide_by_fold(1, f)
+        assert f.called_multiply
+
 
 class TestMathFunctions(unittest.TestCase):
     """

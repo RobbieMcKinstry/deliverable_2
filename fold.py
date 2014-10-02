@@ -1,21 +1,27 @@
-from fold_math import add
-from fold_math import subtract
-from fold_math import divide
-from fold_math import multiply
+import fold_math as fm
+
+def subtract_fold(subtrahend, minuend):
+    """
+    Takes a numeric argument and a fold, and subtracts the sum of the fold from the numeric argument.
+    """
+    return subtrahend - minuend.add()
+
+def divide_by_fold(numerator, denominator):
+    """
+    Takes a numeric argument and a fold, and divides the product of the fold from the argument
+    """
+    return numerator / denominator.multiply()
 
 class Fold:
 
-	def __init__(self, core):
-		self.cores = core
-		
-	def __add__(self):
-		return add([18,31,27,2], self.cores)
+    def __init__(self, elements, cores=4):
+        self.elements = elements
+        self.cores = cores
 
-	def __truediv__(self):
-		return divide([72,3,4], self.cores)
+    # applies the multiply function to the arguments in the fold.
+    def multiply(self):
+        fm.multiply(self.elements, cores=self.cores)
 
-	def __sub__(self):
-		return subtract([14,3,7,2], self.cores)
-
-	def __mult__(self):
-		return multiply([3,2,8,10], self.cores)
+    # Applies the addition function to the arugments in the fold
+    def add(self):
+        fm.add(self.elements, cores=self.cores)
