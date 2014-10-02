@@ -1,5 +1,46 @@
 from fold_math import subtract, power, permutate, combination, add, factorial, multiply, divide, average, split_fold
 import unittest
+import fold
+
+class MockFold:
+
+    def __init__(self, elements, cores=4):
+        self.elements = elements
+
+    def multiply(self):
+        self.called_multiply = True
+        return 1
+
+    def add(self):
+        self.called_add = True
+        return 1
+
+    def inverse_sum(self):
+        self.called_inverse = True
+        return 1/2
+
+
+class TestFoldClass(unittest.TestCase):
+    """
+    Tests the functions and the class in fold.py
+    """
+
+    def test_subtract_fold(self):
+        f = MockFold([1, 2, 3, 4])
+        fold.subtract_fold(1, f)
+        assert f.called_add
+
+    def test_divide_by_fold(self):
+        f = MockFold([1, 2, 3, 4])
+        fold.divide_by_fold(1, f)
+        assert f.called_multiply
+
+
+    def test_add_reciprical(self):
+        f = MockFold([1, 2, 3, 4])
+        fold.add_reciprical(1, f)
+        assert f.called_inverse
+
 
 class TestMathFunctions(unittest.TestCase):
     """
@@ -72,6 +113,17 @@ class TestMathFunctions(unittest.TestCase):
         assert None == add([15])
         assert None == add([ 1, {} ])
 
+
+    def test_when_add_gets_gets_no_args(self):
+        """
+        This will test the functionality of the add() function.
+        The function will take in an empty array.
+        The function should have the ability
+        The test will pass if the function returns None and fails otherwise.
+        """
+        result1      = add([])
+        assert None == result1, 'Expected: {0}\nObserved: {1}'.format(None, result1)
+ 
 
     """ Subtraction function tests"""
     def test_subtraction(self):
@@ -239,7 +291,6 @@ class TestMathFunctions(unittest.TestCase):
         assert None == average([])
 	
     """ Combination function tests """ 
-    @unittest.skip('File is not yet red. This test is red though.')
     def test_combination(self):
         """
         This will test the functionality of the combination() function.
@@ -250,7 +301,6 @@ class TestMathFunctions(unittest.TestCase):
         """
         assert 220 == combination(12,3)
 	
-    @unittest.skip('File is not yet red. This test is red though.')
     def test_neg_combination(self):
         """
         This will test the functionality of the combination() function.
@@ -262,7 +312,6 @@ class TestMathFunctions(unittest.TestCase):
         assert None == combination(-2,4)
 		
     """ Permutation function test """
-    @unittest.skip('File is not yet red. This test is red though.')
     def test_permutate(self):
         """
         This will test the functionality of the permutate() function.
@@ -272,8 +321,8 @@ class TestMathFunctions(unittest.TestCase):
         otherwise.
         """
         assert 840 == permutate(7,4)
-        
-    @unittest.skip('File is not yet red. This test is red though.')
+
+
     def test_neg_permutate(self):
         """
         This will test the functionality of the permutate() function.
@@ -285,18 +334,24 @@ class TestMathFunctions(unittest.TestCase):
         assert None == permutate(-2,4)
 		
     """ Power function tests """ 
-    @unittest.skip('File is not yet red. This test is red though.')
     def test_power(self):
         """
         This will test the functionality of the power() function.
-        THis function will take in the n and e values and raise
+        This function will take in the n and e values and raise
         the n value to the e. This test will pass if the returned
         value is equivalent to n^e, otherwise it will fail.
         """
         assert 343 == power(7,3)
-	
-    @unittest.skip('File is not yet red. This test is red though.')
-    def test_negative_power(self):
+
+    def test_when_power_is_zero(self):
+        """
+        This function tests when the power is zero in the power() function.
+        This should always return 1, even if the base is zero (in mathematics, zero to the zero is undefinted. But we're not in mathematics, are we?
+        """
+        assert 1 == power(7, 0)
+
+
+    def test_when_power_has_negative_base(self):
         """
         This will test the functionality of the power() function.
         This test will ensure that the power function handles raising 
@@ -306,6 +361,13 @@ class TestMathFunctions(unittest.TestCase):
         """
         assert 100 == power(-10, 2)
 	
+
+    def test_when_power_is_negative(self):
+        """
+        This function tests when the power() function has an exponent that's negative.
+        """
+        assert (1/4) == power(4, -1)
+
 
 if __name__ == '__main__':
     unittest.main()
