@@ -31,19 +31,49 @@ def average(arguments, cores=4):
     total = add(arguments, cores=cores)
     return total/len(arguments)
 
-def permutate(n, r, cores=4):
-    pass
 
 def power(base, exponent, cores=4):
-    pass
+    result = 1
+    positive = True
+    if exponent == 1:
+        return base
+    elif exponent == -1:
+        return 1/base
+    elif exponent == 0:
+        return 1
+    elif exponent < 0:
+        positive = False
+
+    arguments = [base] * exponent
+    result = multiply(arguments, cores=cores)
+   
+    if not positive:
+        result = 1 / result
+    
+    return result
+
 
 def factorial(n, cores=4):
     factors = range(1, n + 1)
     return multiply(factors, cores=cores)
 
+
 def combination(n, r, cores=4):
-    pass
-#    n! /(k! * (n-k)!)
+    if n < 0 or r < 0:
+        return None
+    fact_n      = factorial(n, cores=cores)
+    fact_r      = factorial(r, cores=cores)
+    fact_nr     = factorial(n-r, cores=cores)
+    return fact_n / ( fact_r * fact_nr)
+
+
+def permutate(n, r, cores=4):
+    if n < 0 or r < 0:
+        return None
+    fact_n      = factorial(n, cores=cores)
+    fact_nr     = factorial(n-r, cores=cores)
+    return fact_n / fact_nr
+
 
 def divide(arguments, cores=4):
     if len(arguments) < 2:
