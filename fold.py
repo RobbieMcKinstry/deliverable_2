@@ -12,6 +12,12 @@ def divide_by_fold(numerator, denominator):
     """
     return numerator / denominator.multiply()
 
+def add_reciprical(first, second):
+    """
+    Takes a numeric argument and a fold, and adds the inverse sum of the fold to the argument
+    """
+    return fm.add([ first, second.inverse_sum()])
+
 class Fold:
 
     def __init__(self, elements, cores=4):
@@ -20,8 +26,11 @@ class Fold:
 
     # applies the multiply function to the arguments in the fold.
     def multiply(self):
-        fm.multiply(self.elements, cores=self.cores)
+        return fm.multiply(self.elements, cores=self.cores)
 
     # Applies the addition function to the arugments in the fold
     def add(self):
-        fm.add(self.elements, cores=self.cores)
+        return fm.add(self.elements, cores=self.cores)
+       
+    def inverse_sum(self):
+        return 1/self.add()

@@ -15,6 +15,9 @@ class MockFold:
         self.called_add = True
         return 1
 
+    def inverse_sum(self):
+        self.called_inverse = True
+        return 1/2
 
 
 class TestFoldClass(unittest.TestCase):
@@ -31,6 +34,12 @@ class TestFoldClass(unittest.TestCase):
         f = MockFold([1, 2, 3, 4])
         fold.divide_by_fold(1, f)
         assert f.called_multiply
+
+
+    def test_add_reciprical(self):
+        f = MockFold([1, 2, 3, 4])
+        fold.add_reciprical(1, f)
+        assert f.called_inverse
 
 
 class TestMathFunctions(unittest.TestCase):
@@ -104,6 +113,17 @@ class TestMathFunctions(unittest.TestCase):
         assert None == add([15])
         assert None == add([ 1, {} ])
 
+
+    def test_when_add_gets_gets_no_args(self):
+        """
+        This will test the functionality of the add() function.
+        The function will take in an empty array.
+        The function should have the ability
+        The test will pass if the function returns None and fails otherwise.
+        """
+        result1      = add([])
+        assert None == result1, 'Expected: {0}\nObserved: {1}'.format(None, result1)
+ 
 
     """ Subtraction function tests"""
     def test_subtraction(self):
